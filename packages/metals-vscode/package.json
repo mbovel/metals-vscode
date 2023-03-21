@@ -47,6 +47,7 @@
     "onCommand:metals.new-scala-project",
     "onDebugResolve:scala",
     "onLanguage:scala",
+    "onNotebook:scala-notebook",
     "workspaceContains:build.sbt",
     "workspaceContains:build.sc",
     "workspaceContains:project/build.properties",
@@ -57,6 +58,18 @@
     "workspaceContains:*/*/src/main/scala"
   ],
   "contributes": {
+    "notebooks": [
+      {
+          "id": "scala-notebook",
+          "type": "scala-notebook",
+          "displayName": "Scala Notebook",
+          "selector": [
+              {
+                  "filenamePattern": "*.notebook.worksheet.sc"
+              }
+          ]
+      }
+    ],
     "languages": [
       {
         "id": "javap-verbose",

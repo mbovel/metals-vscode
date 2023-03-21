@@ -97,6 +97,7 @@ import {
 } from "./installJavaAction";
 import { openSettingsAction } from "./consts";
 import { ScalaCodeLensesParams } from "./debugger/types";
+import { ScalaNotebookSerializer } from "./notebooks";
 
 const outputChannel = window.createOutputChannel("Metals");
 const downloadJava = "Download Java";
@@ -146,6 +147,13 @@ export async function activate(context: ExtensionContext): Promise<void> {
     context,
     serverVersion,
     outputChannel
+  );
+
+  context.subscriptions.push(
+    workspace.registerNotebookSerializer(
+      "scala-notebook",
+      new ScalaNotebookSerializer()
+    )
   );
 }
 
@@ -1068,6 +1076,7 @@ function launchMetals(
           const workheetEditors = editors.filter(
             (editor) => editor.document.uri.toString() == path
           );
+          console.log(params);
           if (workheetEditors.length > 0) {
             const options = params.options.map<DecorationOptions>((o) => {
               return {
